@@ -1,0 +1,110 @@
+/* styles.css */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+
+/* Common styles for user profile */
+
+.user-profile {
+  @apply bg-green-600 rounded-lg shadow-md max-w-screen-md mx-auto py-8 px-6 relative;
+  background-color: rgb(0, 150, 136);
+}
+.profile-header {
+  @apply flex items-center mb-8;
+}
+
+.profile-picture {
+  @apply overflow-hidden mr-4 border-4 border-white w-44 h-44 rounded-full bg-gray-300;
+}
+
+.profile-picture img {
+  @apply w-full h-full object-cover;
+}
+
+.profile-details {
+  @apply flex-grow;
+}
+.name {
+  @apply text-2xl font-bold mb-2 text-yellow-400;
+}
+
+.email, .username, .type, .membership-status {
+  @apply text-white mb-2;
+}
+
+.section-title {
+  @apply text-xl font-bold mb-4 text-gray-700;
+}
+
+.engagement {
+  @apply mb-8;
+}
+
+.engagement-item {
+  @apply flex items-center mb-4;
+}
+
+.engagement-item img {
+  @apply w-12 h-12 mr-3;
+}
+.count {
+  @apply bg-red-600 text-white rounded-full p-1 text-xs relative -left-5 bottom-5;
+}
+
+.label {
+  @apply text-white;
+}
+
+/* Added styles for clickable options */
+.settings, .account, .membership-billing {
+  margin-bottom: 30px;
+}
+.settings, .account, .membership-billing {
+  @apply mb-8;
+}
+.settings-item, .account-item, .membership-billing-item {
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.settings-item:hover, .account-item:hover, .membership-billing-item:hover {
+  background-color: #f0f0f0;
+}
+
+
