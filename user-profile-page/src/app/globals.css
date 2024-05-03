@@ -77,7 +77,7 @@ body {
 }
 
 .engagement-item img {
-  @apply w-12 h-12 mr-3;
+  @apply w-12 h-12 mr-4;
 }
 .count {
   @apply bg-red-600 text-white rounded-full p-1 text-xs relative -left-5 bottom-5;

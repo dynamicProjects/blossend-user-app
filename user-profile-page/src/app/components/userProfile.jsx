@@ -34,7 +34,7 @@ const UserProfile = () => {
         </div>
         <div className="engagement-item">
           <img src="/bell.jpeg" alt="Notifications" />
-          <span className="count">3</span>
+          <span className="count">10</span>
           <span className="label">Notifications</span>
         </div>
       </div>
