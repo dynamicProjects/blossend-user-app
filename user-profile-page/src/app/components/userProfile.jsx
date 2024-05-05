@@ -85,9 +85,9 @@ const UserProfile = () => {
         {isDropdownOpen && (
           <div className="dropdown-content">
             <ul>
-              <li>Option 1</li>
-              <li>Option 2</li>
-              <li>Option 3</li>
+              <li>Restricted</li>
+              <li>Blocked</li>
+              <li>Closed Friends</li>
             </ul>
           </div>
         )}
