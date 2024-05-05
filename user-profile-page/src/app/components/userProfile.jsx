@@ -1,19 +1,56 @@
-import React from 'react';
+
+"use client";
+import React, { useState } from 'react';
 import '../globals.css';
+import ChangePasswordModal from './ChangePasswordModal';
 
 const UserProfile = () => {
+  // State to manage user information
+  const [userInfo, setUserInfo] = useState({
+    name: "Shruti Shrivastava",
+    email: "s.shrivastava@example.com",
+    profilePic: "/employee1.avif",
+    type:"Regular User",
+    membershipStatus:"Free"
+  });
+
+  // Function to handle clicking "View Pablo’s Profile"
+  const handleViewPabloProfile = () => {
+    // Update user information to Pablo's details
+    setUserInfo({
+      name: "Pablo Diaz",
+      email: "pablo@example.com",
+      profilePic: "/pabloPic.jpg",
+      type:"Staff",
+      membershipStatus:"Premium"
+    });
+  };
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const handleDropdownToggle = () => {
+    setIsDropdownOpen(prevState => !prevState);
+  };
   return (
     <div className="user-profile">
       <div className="profile-header">
         <div className="profile-picture">
-          <img src="/employee1.avif" alt="employee" />
+        <img src={userInfo.profilePic} alt="employee" />
         </div>
 
         <div className="profile-details">
-          <h1 className="name">Shruti Shrivastava</h1>
-          <p className="email">Email: s.shrivastava@example.com</p>
-          <p className="type">Type: Regular User</p>
-          <p className="membership-status">Membership Status: Free</p>
+        <h1 className="name">{userInfo.name}</h1>
+          <p className="email">Email: {userInfo.email}</p>
+          <p className="type">Type: {userInfo.type}</p>
+          <p className="membership-status">Membership Status: {userInfo.membershipStatus}</p>
         </div>
       </div>
 
@@ -44,7 +81,16 @@ const UserProfile = () => {
         <div className="settings-item">User Settings</div>
         <div className="settings-item">Search</div>
         <div className="settings-item">Explore</div>
-        <div className="settings-item">Permissions / Privacy</div>
+        <div className="settings-item" onClick={handleDropdownToggle}>Permissions / Privacy</div>
+        {isDropdownOpen && (
+          <div className="dropdown-content">
+            <ul>
+              <li>Option 1</li>
+              <li>Option 2</li>
+              <li>Option 3</li>
+            </ul>
+          </div>
+        )}
         <div className="settings-item">Subscriptions</div>
         <div className="settings-item">Billing</div>
       </div>
@@ -52,8 +98,8 @@ const UserProfile = () => {
       <div className="account">
         <h2 className="section-title">Account</h2>
         <div className="account-item">Switch Accounts</div>
-        <div className="account-item">Ability to Change Password</div>
-        <div className="account-item">View Pablo’s Profile</div>
+        <div className="account-item" onClick={handleOpenModal}>Ability to Change Password</div>
+        <div className="account-item"  onClick={handleViewPabloProfile}>View Pablo’s Profile</div>
       </div>
 
       <div className="membership-billing">
@@ -61,6 +107,7 @@ const UserProfile = () => {
         <div className="membership-billing-item">Enroll in Premium</div>
         <div className="membership-billing-item">Billing Info</div>
       </div>
+      {isModalOpen && <ChangePasswordModal onClose={handleCloseModal} />}
     </div>
   );
 };
