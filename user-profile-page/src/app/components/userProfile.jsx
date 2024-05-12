@@ -11,7 +11,8 @@ const UserProfile = () => {
     email: "s.shrivastava@example.com",
     profilePic: "/employee1.avif",
     type:"Regular User",
-    membershipStatus:"Free"
+    membershipStatus:"Free",
+    city:"Houston"
   });
 
   // Function to handle clicking "View Pablo’s Profile"
@@ -22,10 +23,13 @@ const UserProfile = () => {
       email: "pablo@example.com",
       profilePic: "/pabloPic.jpg",
       type:"Staff",
-      membershipStatus:"Premium"
+      membershipStatus:"Premium",
+      city:"Austin"
     });
   };
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isBillingDropdownOpen, setIsBillingDropdownOpen] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -39,8 +43,13 @@ const UserProfile = () => {
   const handleDropdownToggle = () => {
     setIsDropdownOpen(prevState => !prevState);
   };
+  const handleBillingDropdownToggle = () => {
+    setIsBillingDropdownOpen(prevState => !prevState);
+    // Toggle profile container expansion
+    setIsExpanded(prevState => !prevState);
+  };
   return (
-    <div className="user-profile">
+    <div className={`user-profile ${isExpanded ? 'expanded' : ''}`}>
       <div className="profile-header">
         <div className="profile-picture">
         <img src={userInfo.profilePic} alt="employee" />
@@ -48,9 +57,10 @@ const UserProfile = () => {
 
         <div className="profile-details">
         <h1 className="name">{userInfo.name}</h1>
+        <p className="type">Type: {userInfo.type}</p>
+        <p className="membership-status">Membership Status: {userInfo.membershipStatus}</p>
           <p className="email">Email: {userInfo.email}</p>
-          <p className="type">Type: {userInfo.type}</p>
-          <p className="membership-status">Membership Status: {userInfo.membershipStatus}</p>
+          <p className="membership-status">City: {userInfo.city}</p>
         </div>
       </div>
 
@@ -77,9 +87,7 @@ const UserProfile = () => {
       </div>
 
       <div className="settings">
-        <h2 className="section-title">Settings</h2>
-        <div className="settings-item">User Settings</div>
-        <div className="settings-item">Search</div>
+        <h2 className="section-title">Privacy & security ettings</h2>
         <div className="settings-item">Explore</div>
         <div className="settings-item" onClick={handleDropdownToggle}>Permissions / Privacy</div>
         {isDropdownOpen && (
@@ -91,8 +99,6 @@ const UserProfile = () => {
             </ul>
           </div>
         )}
-        <div className="settings-item">Subscriptions</div>
-        <div className="settings-item">Billing</div>
       </div>
 
       <div className="account">
@@ -100,12 +106,22 @@ const UserProfile = () => {
         <div className="account-item">Switch Accounts</div>
         <div className="account-item" onClick={handleOpenModal}>Ability to Change Password</div>
         <div className="account-item"  onClick={handleViewPabloProfile}>View Pablo’s Profile</div>
+        <div className="settings-item">User Settings</div>
+        <div className="settings-item">Logout</div>
       </div>
 
       <div className="membership-billing">
         <h2 className="section-title">Membership & Billing</h2>
         <div className="membership-billing-item">Enroll in Premium</div>
-        <div className="membership-billing-item">Billing Info</div>
+        <div className="membership-billing-item" onClick={handleBillingDropdownToggle}>Billing Info</div>
+        {isBillingDropdownOpen && (
+          <div className="dropdown-content">
+            <input type="text" placeholder="Name on Card" />
+            <input type="text" placeholder="Card Number" />
+            <input type="text" placeholder="Expiration Date" />
+            <input type="text" placeholder="CVV" />
+          </div>
+        )}
       </div>
       {isModalOpen && <ChangePasswordModal onClose={handleCloseModal} />}
     </div>

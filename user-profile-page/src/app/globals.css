@@ -40,6 +40,10 @@ body {
 .user-profile {
   @apply bg-green-600 rounded-lg shadow-md max-w-screen-md mx-auto py-8 px-6 relative;
   background-color: rgb(0, 150, 136);
+  transition: height 0.3s ease; 
+}
+.user-profile.expanded {
+  height: 163vh; 
 }
 .profile-header {
   @apply flex items-center mb-8;
@@ -183,8 +187,19 @@ body {
   @apply bg-blue-600;
 }
 
+/* Dropdown content */
+.membership-billing {
+  position: relative;
+}
 
+.dropdown-content {
+  @apply bg-white border border-gray-300 mb-6 rounded-md left-0 w-full z-10 shadow-md;
+}
 
+.dropdown-content input[type="text"] {
+  @apply w-full px-4 py-2 border border-gray-300 rounded-md mb-2 focus:outline-none focus:border-blue-500;
+}
 
-
-
+.dropdown-content input[type="text"]:focus {
+  @apply border-blue-500;
+}
